@@ -7,10 +7,10 @@ namespace TodoApp.Services
 {
     public class SqlDataConnector : IDataConnection
     {
-        public List<User> GetAllUsers()
+        public List<UserModel> GetAllUsers()
         {
             const string sqlExpression = "sp_allUsers";
-            List<User> result = new();
+            List<UserModel> result = new();
 
             using (SqlConnection connection = new(GlobalConfig.ConnectionString))
             {
@@ -26,7 +26,7 @@ namespace TodoApp.Services
                     {
                         while (reader.Read())
                         {
-                            result.Add(new User
+                            result.Add(new UserModel
                             {
                                 UserId = reader.GetInt32(0),
                                 FirstName = reader.GetString(1),

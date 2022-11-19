@@ -8,6 +8,6 @@ namespace TodoApp.Services.Interfaces
         /// Gets all users from database
         /// </summary>
         /// <returns>List of users</returns>
-        List<User> GetAllUsers();
+        List<UserModel> GetAllUsers();
     }
 }
