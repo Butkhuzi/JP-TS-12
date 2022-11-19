@@ -1,6 +1,6 @@
 ﻿namespace Todo.Library
 {
-    public class Todo
+    public class TodoModel
     {
         public int TodoId { get; set; }
         public string Title { get; set; }
