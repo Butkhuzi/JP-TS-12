@@ -150,5 +150,85 @@ namespace TodoApp.Services
             }
 
         }
+        public UserModel LoginUser(UserModel user)
+        {
+            if (user is null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            const string sqlExpression = @"sp_login";
+            UserModel result = new();
+
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new(sqlExpression,connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@email", user.Email);
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            result.UserId = reader.GetInt32(0);
+                            result.FirstName = reader.GetString(1);
+                            result.LastName = reader.GetString(2);
+                            result.FullName = reader.GetString(3);
+                            result.Email = reader.GetString(4);
+                        }
+                    }
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
+        }
+
+        public UserModel RegisterUser(UserModel model)
+        {
+            const string sqlExpression = "sp_registerUser";
+
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new(sqlExpression, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@userId", model.UserId);
+                    command.Parameters.AddWithValue("@firstName", model.FirstName);
+                    command.Parameters.AddWithValue("@lastName", model.LastName);
+                    command.Parameters.AddWithValue("@email", model.Email);
+
+                    command.ExecuteNonQuery();
+
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return model;
+            // TODO -- Write test for this function.
+        }
     }
 }
