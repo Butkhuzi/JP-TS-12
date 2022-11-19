@@ -7,6 +7,51 @@ namespace TodoApp.Services
 {
     public class SqlDataConnector : IDataConnection
     {
+        public List<TodoModel> GetAllTodos()
+        {
+            const string sqlExpression = "sp_allTodos";
+            List<TodoModel> result = new();
+
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    SqlCommand command = new(sqlExpression, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            result.Add(new TodoModel
+                            {
+                                TodoId = reader.GetInt32(0),
+                                Title = reader.GetString(1),
+                                Description = reader.GetString(2),
+                                StartDate = reader.GetDateTime(3),
+                                DueDate = reader.GetDateTime(4),
+                                Status = reader.GetString(5),
+                                Priority = reader.GetString(6),
+                                UserId = reader.GetInt32(7)
+                            });
+                        }
+                    }
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return result;
+        }
         public List<UserModel> GetAllUsers()
         {
             const string sqlExpression = "sp_allUsers";
@@ -22,7 +67,7 @@ namespace TodoApp.Services
 
                     SqlDataReader reader = command.ExecuteReader();
 
-                    if (reader.Read())
+                    if (reader.HasRows)
                     {
                         while (reader.Read())
                         {

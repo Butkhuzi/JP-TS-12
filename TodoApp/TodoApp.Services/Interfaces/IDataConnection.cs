@@ -9,5 +9,10 @@ namespace TodoApp.Services.Interfaces
         /// </summary>
         /// <returns>List of users</returns>
         List<UserModel> GetAllUsers();
+        /// <summary>
+        /// Gets all todos from database
+        /// </summary>
+        /// <returns>List of todos</returns>
+        List<TodoModel> GetAllTodos();
     }
 }
