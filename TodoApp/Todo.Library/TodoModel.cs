@@ -1,4 +1,6 @@
-﻿namespace Todo.Library
+﻿using TodoApp.Library;
+
+namespace Todo.Library
 {
     public class TodoModel
     {
@@ -10,5 +12,15 @@
         public string Status { get; set; }
         public string Priority { get; set; }
         public int UserId { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return new TodoEquilityComparer().Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return new TodoEquilityComparer().GetHashCode();
+        }
     }
 }
