@@ -14,5 +14,11 @@ namespace TodoApp.Services.Interfaces
         /// </summary>
         /// <returns>List of todos</returns>
         List<TodoModel> GetAllTodos();
+        /// <summary>
+        /// Gets all todos for a specifc user.
+        /// </summary>
+        /// <param name="model">User model</param>
+        /// <returns>List of todos</returns>
+        List<TodoModel> GetAllTodosPerUser(UserModel model);
     }
 }
