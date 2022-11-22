@@ -196,9 +196,13 @@ namespace TodoApp.Services
 
             return result;
         }
-
         public UserModel RegisterUser(UserModel model)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             const string sqlExpression = "sp_registerUser";
 
             using (SqlConnection connection = new(GlobalConfig.ConnectionString))
@@ -209,7 +213,6 @@ namespace TodoApp.Services
                     SqlCommand command = new(sqlExpression, connection);
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@userId", model.UserId);
                     command.Parameters.AddWithValue("@firstName", model.FirstName);
                     command.Parameters.AddWithValue("@lastName", model.LastName);
                     command.Parameters.AddWithValue("@email", model.Email);
@@ -226,9 +229,7 @@ namespace TodoApp.Services
                     connection.Close();
                 }
             }
-
             return model;
-            // TODO -- Write test for this function.
         }
     }
 }
