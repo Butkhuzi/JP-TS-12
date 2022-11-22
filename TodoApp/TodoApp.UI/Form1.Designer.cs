@@ -40,7 +40,7 @@
             this.emailValue.Location = new System.Drawing.Point(12, 143);
             this.emailValue.Name = "emailValue";
             this.emailValue.Size = new System.Drawing.Size(328, 27);
-            this.emailValue.TabIndex = 0;
+            this.emailValue.TabIndex = 1;
             // 
             // emailLabel
             // 
@@ -57,7 +57,7 @@
             this.headerLabel.AutoSize = true;
             this.headerLabel.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.headerLabel.ForeColor = System.Drawing.Color.Coral;
-            this.headerLabel.Location = new System.Drawing.Point(58, 9);
+            this.headerLabel.Location = new System.Drawing.Point(65, 9);
             this.headerLabel.Name = "headerLabel";
             this.headerLabel.Size = new System.Drawing.Size(229, 31);
             this.headerLabel.TabIndex = 2;
@@ -76,7 +76,7 @@
             this.loginBtn.Location = new System.Drawing.Point(0, 254);
             this.loginBtn.Name = "loginBtn";
             this.loginBtn.Size = new System.Drawing.Size(348, 56);
-            this.loginBtn.TabIndex = 3;
+            this.loginBtn.TabIndex = 2;
             this.loginBtn.Text = "ავტორიზაცია";
             this.loginBtn.UseVisualStyleBackColor = false;
             // 
@@ -87,9 +87,10 @@
             this.registerLink.Location = new System.Drawing.Point(232, 120);
             this.registerLink.Name = "registerLink";
             this.registerLink.Size = new System.Drawing.Size(108, 20);
-            this.registerLink.TabIndex = 4;
+            this.registerLink.TabIndex = 3;
             this.registerLink.TabStop = true;
             this.registerLink.Text = "რეგისტრაცია";
+            this.registerLink.Click += new System.EventHandler(this.registerLink_Click);
             // 
             // Form1
             // 
@@ -105,6 +106,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ავტორიზაცია";
             this.ResumeLayout(false);
             this.PerformLayout();
