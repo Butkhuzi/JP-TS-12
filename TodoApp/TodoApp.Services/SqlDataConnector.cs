@@ -150,11 +150,11 @@ namespace TodoApp.Services
             }
 
         }
-        public async Task<UserModel> LoginUserAsync(UserModel user)
+        public async Task<UserModel> LoginUserAsync(string email)
         {
-            if (user is null)
+            if (string.IsNullOrWhiteSpace(email))
             {
-                throw new ArgumentNullException(nameof(user));
+                throw new ArgumentException($"'{nameof(email)}' cannot be null or whitespace.", nameof(email));
             }
 
             const string sqlExpression = @"sp_login";
@@ -168,7 +168,7 @@ namespace TodoApp.Services
                     SqlCommand command = new(sqlExpression,connection);
                     command.CommandType = CommandType.StoredProcedure;
 
-                    command.Parameters.AddWithValue("@email", user.Email);
+                    command.Parameters.AddWithValue("@email", email);
 
                     SqlDataReader reader = await command.ExecuteReaderAsync();
 

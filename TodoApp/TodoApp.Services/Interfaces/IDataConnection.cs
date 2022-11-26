@@ -25,7 +25,7 @@ namespace TodoApp.Services.Interfaces
         /// </summary>
         /// <param name="user">User that tries to log in</param>
         /// <returns>Logged in user</returns>
-        Task<UserModel> LoginUserAsync(UserModel user);
+        Task<UserModel> LoginUserAsync(string email);
         /// <summary>
         /// Register user in database
         /// </summary>
