@@ -79,6 +79,7 @@
             this.loginBtn.TabIndex = 2;
             this.loginBtn.Text = "ავტორიზაცია";
             this.loginBtn.UseVisualStyleBackColor = false;
+            this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
             // registerLink
             // 
