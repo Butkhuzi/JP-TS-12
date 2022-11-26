@@ -3,12 +3,12 @@
     public class GetAllTodosShould
     {
         [Fact]
-        public void Return_All_Todos_From_Database()
+        public async void Return_All_Todos_From_Database()
         {
             SqlDataConnector sqlDataConnector = new();
 
-            var expected = sqlDataConnector.GetAllTodos();
-            var actual = sqlDataConnector.GetAllTodos();
+            var expected = await sqlDataConnector.GetAllTodosAsync();
+            var actual = await sqlDataConnector.GetAllTodosAsync();
 
             Assert.Equal(expected, actual, new TodoEquilityComparer());
         }

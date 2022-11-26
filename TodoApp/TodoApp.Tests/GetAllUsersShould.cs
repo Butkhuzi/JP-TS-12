@@ -3,7 +3,7 @@
     public class GetAllUsersShould
     {
         [Fact]
-        public void Return_All_Users_From_Database()
+        public async void Return_All_Users_From_Database()
         {
             SqlDataConnector sqlDataConnector = new();
 
@@ -59,10 +59,10 @@
             //    }
             //};
 
-            var expected = sqlDataConnector.GetAllUsers();
-            var actual = sqlDataConnector.GetAllUsers();
+            var expected = await sqlDataConnector.GetAllUsersAsync();
+            var actual = await sqlDataConnector.GetAllUsersAsync();
 
-            Assert.Equal(expected, actual,new UserEquilityComparer());
+            Assert.Equal(expected, actual, new UserEquilityComparer());
         }
     }
 }
