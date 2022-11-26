@@ -34,7 +34,8 @@ namespace TodoApp.UI
                 if (await EmailIsUnique())
                 {
                     await GlobalConfig.DataConnection.RegisterUserAsync(newUser);
-                    MessageBox.Show("მომხმარებელი წარმატებით დარეგისტრირდა", "მომხმარებელი დარეგისტრირდა", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                    MessageBox.Show("მომხმარებელი წარმატებით დარეგისტრირდა", "მომხმარებელი დარეგისტრირდა", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ClearForm();
                 }
                 else
                 {
@@ -64,5 +65,11 @@ namespace TodoApp.UI
         private bool FieldsAreNotEmpty() => !string.IsNullOrWhiteSpace(firstNameValue.Text) && !string.IsNullOrWhiteSpace(lastNameValue.Text) && !string.IsNullOrWhiteSpace(emailValue.Text);
         private bool EmailIsValid() => emailValue.Text.Contains('@') && emailValue.Text.Contains('.');
         private bool FieldsAreText() => firstNameValue.Text.All(x => char.IsLetter(x)) && lastNameValue.Text.All(x => char.IsLetter(x));
+        private void ClearForm()
+        {
+            firstNameValue.Text = string.Empty;
+            lastNameValue.Text = string.Empty;
+            emailValue.Text = string.Empty;
+        }
     }
 }
