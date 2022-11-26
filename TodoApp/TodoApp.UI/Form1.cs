@@ -25,7 +25,8 @@ namespace TodoApp.UI
                 if (await UserExists())
                 {
                     _loggedInUser = await GlobalConfig.DataConnection.LoginUserAsync(emailValue.Text);
-                    MessageBox.Show("WELCOME"); 
+                    DashboardForm dashboardForm = new(_loggedInUser);
+                    dashboardForm.ShowDialog();
                 }
                 else
                 {
