@@ -17,10 +17,13 @@ namespace Todo.Library
         {
             return new TodoEquilityComparer().Equals(obj);
         }
-
         public override int GetHashCode()
         {
             return new TodoEquilityComparer().GetHashCode();
+        }
+        public override string ToString()
+        {
+            return Title;
         }
     }
 }
