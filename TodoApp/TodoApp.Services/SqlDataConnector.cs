@@ -7,6 +7,42 @@ namespace TodoApp.Services
 {
     public class SqlDataConnector : IDataConnection
     {
+        //TODO -- Test this function...
+        public async Task<TodoModel> EditTodoAsync(TodoModel model)
+        {
+            const string sqlExpression = "sp_editTodo";
+
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    await connection.OpenAsync();
+                    SqlCommand command = new(sqlExpression, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@title",model.Title);
+                    command.Parameters.AddWithValue("@description",model.Description);
+                    command.Parameters.AddWithValue("@startDate",model.StartDate);
+                    command.Parameters.AddWithValue("@dueDate",model.DueDate);
+                    command.Parameters.AddWithValue("@status",model.Status);
+                    command.Parameters.AddWithValue("@prioirity",model.Priority);
+                    command.Parameters.AddWithValue("@userId", model.UserId);
+
+                    await command.ExecuteNonQueryAsync();
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    await connection.CloseAsync();
+                }
+            }
+
+            return model;
+        }
+
         public async Task<List<TodoModel>> GetAllTodosAsync()
         {
             const string sqlExpression = "sp_allTodos";
