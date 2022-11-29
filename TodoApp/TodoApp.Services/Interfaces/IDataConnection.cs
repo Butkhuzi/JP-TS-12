@@ -32,5 +32,12 @@ namespace TodoApp.Services.Interfaces
         /// <param name="model">New user</param>
         /// <returns>Registered user</returns>
         Task<UserModel> RegisterUserAsync(UserModel model);
+
+        /// <summary>
+        /// Edit todo in database
+        /// </summary>
+        /// <param name="model">Todo to edit</param>
+        /// <returns>Edited todo</returns>
+        Task<TodoModel> EditTodoAsync(TodoModel model);
     }
 }
