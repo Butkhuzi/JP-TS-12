@@ -75,13 +75,35 @@ namespace TodoApp.UI
             priorityValue.Text = string.Empty;
         }
 
-        private void editTodoBtn_Click(object sender, EventArgs e)
+        private async void editTodoBtn_Click(object sender, EventArgs e)
         {
             try
             {
                 if (TextBoxesAreValid() && DateTimesAreValid() && StatusIsValid() && PriorityIsValid())
                 {
-                    MessageBox.Show("EDIT");
+
+                    DialogResult editDialog = MessageBox.Show("ნამდვილად გსურთ მონაცემების რედაქტირება?", "მონაცემების რედაქტირება", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (editDialog == DialogResult.Yes)
+                    {
+                        TodoModel todoToEdit = new()
+                        {
+                            TodoId = allTodos[todoListBox.SelectedIndex].TodoId,
+                            Title = titleValue.Text,
+                            Description = descriptionValue.Text,
+                            StartDate = startDateValue.Value,
+                            DueDate = dueDateValue.Value,
+                            Status = statusValue.Text,
+                            Priority = priorityValue.Text
+                        };
+
+                        //Real time data refresh
+                        await GlobalConfig.DataConnection.EditTodoAsync(todoToEdit);
+                        allTodos = await GlobalConfig.DataConnection.GetAllTodosPerUserAsync(_loggedInUser);
+                        todoListBox.DataSource = allTodos;
+
+                        MessageBox.Show("თქვენს მიერ შემოყვანილი მონაცემები წარმატებით შეიცვალა", "მონაცემები დარედაქტირდა", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                    }
                 }
                 else
                 {
