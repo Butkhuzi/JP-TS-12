@@ -7,6 +7,65 @@ namespace TodoApp.Services
 {
     public class SqlDataConnector : IDataConnection
     {
+        public async Task<TodoModel> AddTodoAsync(TodoModel model)
+        {
+            const string sqlExpression = "sp_addTodo";
+
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sqlExpression, connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@title",model.Title);
+                    command.Parameters.AddWithValue("@description", model.Description);
+                    command.Parameters.AddWithValue("@startDate", model.StartDate);
+                    command.Parameters.AddWithValue("@dueDate", model.DueDate);
+                    command.Parameters.AddWithValue("@status", model.Status);
+                    command.Parameters.AddWithValue("@priority", model.Priority);
+                    command.Parameters.AddWithValue("@userId", model.UserId);
+
+                    await connection.OpenAsync();
+                    await command.ExecuteNonQueryAsync();
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    await connection.CloseAsync();
+                }
+
+                return model;
+            }
+        }
+        public async Task<TodoModel> DeleteTodoAsync(TodoModel model)
+        {
+            const string sqlExpression = "sp_deleteTodo";
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand command = new(sqlExpression,connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@todoId", model.TodoId);
+
+                    await connection.OpenAsync();
+                    await command.ExecuteNonQueryAsync();
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    await connection.CloseAsync();
+                }
+
+                return model;
+            }
+        }
         public async Task<TodoModel> EditTodoAsync(TodoModel model)
         {
             if (model is null)
