@@ -36,6 +36,7 @@
             this.firstNameValue = new System.Windows.Forms.TextBox();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.registerBtn = new System.Windows.Forms.Button();
+            this.exitLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // headerLabel
@@ -118,12 +119,27 @@
             this.registerBtn.UseVisualStyleBackColor = false;
             this.registerBtn.Click += new System.EventHandler(this.registerBtn_Click);
             // 
+            // exitLabel
+            // 
+            this.exitLabel.AutoSize = true;
+            this.exitLabel.BackColor = System.Drawing.Color.Red;
+            this.exitLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitLabel.Font = new System.Drawing.Font("Sitka Small", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.exitLabel.ForeColor = System.Drawing.Color.White;
+            this.exitLabel.Location = new System.Drawing.Point(325, 2);
+            this.exitLabel.Name = "exitLabel";
+            this.exitLabel.Size = new System.Drawing.Size(21, 23);
+            this.exitLabel.TabIndex = 6;
+            this.exitLabel.Text = "X";
+            this.exitLabel.Click += new System.EventHandler(this.exitLabel_Click);
+            // 
             // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(348, 364);
+            this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.registerBtn);
             this.Controls.Add(this.firstNameLabel);
             this.Controls.Add(this.firstNameValue);
@@ -132,7 +148,7 @@
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.emailValue);
             this.Controls.Add(this.headerLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "RegisterForm";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -152,5 +168,6 @@
         private TextBox firstNameValue;
         private Label firstNameLabel;
         private Button registerBtn;
+        private Label exitLabel;
     }
 }

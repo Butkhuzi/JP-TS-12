@@ -33,6 +33,7 @@
             this.headerLabel = new System.Windows.Forms.Label();
             this.loginBtn = new System.Windows.Forms.Button();
             this.registerLink = new System.Windows.Forms.LinkLabel();
+            this.exitLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // emailValue
@@ -93,18 +94,33 @@
             this.registerLink.Text = "რეგისტრაცია";
             this.registerLink.Click += new System.EventHandler(this.registerLink_Click);
             // 
+            // exitLabel
+            // 
+            this.exitLabel.AutoSize = true;
+            this.exitLabel.BackColor = System.Drawing.Color.Red;
+            this.exitLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitLabel.Font = new System.Drawing.Font("Sitka Small", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.exitLabel.ForeColor = System.Drawing.Color.White;
+            this.exitLabel.Location = new System.Drawing.Point(326, 2);
+            this.exitLabel.Name = "exitLabel";
+            this.exitLabel.Size = new System.Drawing.Size(21, 23);
+            this.exitLabel.TabIndex = 4;
+            this.exitLabel.Text = "X";
+            this.exitLabel.Click += new System.EventHandler(this.exitLabel_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(348, 310);
+            this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.registerLink);
             this.Controls.Add(this.loginBtn);
             this.Controls.Add(this.headerLabel);
             this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.emailValue);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -121,5 +137,6 @@
         private Label headerLabel;
         private Button loginBtn;
         private LinkLabel registerLink;
+        private Label exitLabel;
     }
 }

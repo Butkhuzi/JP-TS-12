@@ -21,5 +21,10 @@ namespace TodoApp.UI
             welcomeLabel.Text = $"გამარჯობა {_loggedInUser.FirstName}";
             mainPanel.Controls.Add(new TodoUserControl(_loggedInUser));
         }
+
+        private void exitLabel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }

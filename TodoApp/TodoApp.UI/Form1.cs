@@ -49,5 +49,10 @@ namespace TodoApp.UI
         }
         private bool FieldsAreNotEmpty() => !string.IsNullOrWhiteSpace(emailValue.Text);
         private bool EmailIsValid() => emailValue.Text.Contains('@') && emailValue.Text.Contains('.');
+
+        private void exitLabel_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

@@ -39,6 +39,7 @@
             this.favoriteIcon = new System.Windows.Forms.PictureBox();
             this.mainPicture = new System.Windows.Forms.PictureBox();
             this.mainPanel = new System.Windows.Forms.Panel();
+            this.exitLabel = new System.Windows.Forms.Label();
             this.sideNavPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.myProfilePciture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.undonePicture)).BeginInit();
@@ -166,16 +167,31 @@
             this.mainPanel.Size = new System.Drawing.Size(928, 709);
             this.mainPanel.TabIndex = 2;
             // 
+            // exitLabel
+            // 
+            this.exitLabel.AutoSize = true;
+            this.exitLabel.BackColor = System.Drawing.Color.Red;
+            this.exitLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitLabel.Font = new System.Drawing.Font("Sitka Small", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.exitLabel.ForeColor = System.Drawing.Color.White;
+            this.exitLabel.Location = new System.Drawing.Point(277, 5);
+            this.exitLabel.Name = "exitLabel";
+            this.exitLabel.Size = new System.Drawing.Size(21, 23);
+            this.exitLabel.TabIndex = 5;
+            this.exitLabel.Text = "X";
+            this.exitLabel.Click += new System.EventHandler(this.exitLabel_Click);
+            // 
             // DashboardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1197, 744);
+            this.Controls.Add(this.exitLabel);
             this.Controls.Add(this.mainPanel);
             this.Controls.Add(this.sideNavPanel);
             this.Controls.Add(this.welcomeLabel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "DashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "მთავარი";
@@ -203,5 +219,6 @@
         private Label undoneLabel;
         private PictureBox undonePicture;
         private Panel mainPanel;
+        private Label exitLabel;
     }
 }
