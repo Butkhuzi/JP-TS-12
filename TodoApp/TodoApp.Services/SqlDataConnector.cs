@@ -7,9 +7,13 @@ namespace TodoApp.Services
 {
     public class SqlDataConnector : IDataConnection
     {
-        //TODO -- Test this function...
         public async Task<TodoModel> EditTodoAsync(TodoModel model)
         {
+            if (model is null)
+            {
+                throw new ArgumentNullException(nameof(model));
+            }
+
             const string sqlExpression = "sp_editTodo";
 
             using (SqlConnection connection = new(GlobalConfig.ConnectionString))
@@ -26,7 +30,7 @@ namespace TodoApp.Services
                     command.Parameters.AddWithValue("@dueDate",model.DueDate);
                     command.Parameters.AddWithValue("@status",model.Status);
                     command.Parameters.AddWithValue("@prioirity",model.Priority);
-                    command.Parameters.AddWithValue("@userId", model.UserId);
+                    command.Parameters.AddWithValue("@todoId", model.TodoId);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -42,7 +46,6 @@ namespace TodoApp.Services
 
             return model;
         }
-
         public async Task<List<TodoModel>> GetAllTodosAsync()
         {
             const string sqlExpression = "sp_allTodos";
