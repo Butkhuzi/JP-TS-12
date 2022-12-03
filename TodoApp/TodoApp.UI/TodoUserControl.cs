@@ -42,9 +42,8 @@ namespace TodoApp.UI
 
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message);
             }
         }
 
@@ -66,6 +65,11 @@ namespace TodoApp.UI
         }
 
         private void clearFormBtn_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
+        private void ClearForm()
         {
             titleValue.Text = string.Empty;
             descriptionValue.Text = string.Empty;
@@ -97,8 +101,8 @@ namespace TodoApp.UI
                             Priority = priorityValue.Text
                         };
 
-                        //Real time data refresh
                         await GlobalConfig.DataConnection.EditTodoAsync(todoToEdit);
+                        //Real time data refresh
                         allTodos = await GlobalConfig.DataConnection.GetAllTodosPerUserAsync(_loggedInUser);
                         todoListBox.DataSource = allTodos;
 
@@ -171,6 +175,81 @@ namespace TodoApp.UI
             }
 
             return result;
+        }
+
+        private async void addBtn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (TextBoxesAreValid() && DateTimesAreValid() && StatusIsValid() && PriorityIsValid())
+                {
+
+                    DialogResult addDialog = MessageBox.Show("ნამდვილად გსურთ მონაცემების დამატება?", "მონაცემების დამატება", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (addDialog == DialogResult.Yes)
+                    {
+                        TodoModel todoToAdd = new()
+                        {
+                            Title = titleValue.Text,
+                            Description = descriptionValue.Text,
+                            StartDate = startDateValue.Value,
+                            DueDate = dueDateValue.Value,
+                            Status = statusValue.Text,
+                            Priority = priorityValue.Text,
+                            UserId = _loggedInUser.UserId
+                        };
+
+                        //Real time data refresh
+                        await GlobalConfig.DataConnection.AddTodoAsync(todoToAdd);
+                        allTodos = await GlobalConfig.DataConnection.GetAllTodosPerUserAsync(_loggedInUser);
+                        todoListBox.DataSource = allTodos;
+
+                        MessageBox.Show("თქვენს მიერ შემოყვანილი მონაცემები წარმატებით დაემატა", "მონაცემების დამატება", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("თქვენს მიერ შემოყვანილი მონაცემები არასწორია", "მონაცემები არასწორია", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void deletePicture_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult deleteDialog = MessageBox.Show("ნამდვილად გსურთ საქმის წაშლა?", "საქმის წაშლა", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+
+                if (deleteDialog == DialogResult.Yes)
+                {
+                    TodoModel todoToDelete = new()
+                    {
+                        TodoId = allTodos[todoListBox.SelectedIndex].TodoId,
+                        Title = titleValue.Text,
+                        Description = descriptionValue.Text,
+                        StartDate = startDateValue.Value,
+                        DueDate = dueDateValue.Value,
+                        Status = statusValue.Text,
+                        Priority = priorityValue.Text
+                    };
+
+                    await GlobalConfig.DataConnection.DeleteTodoAsync(todoToDelete);
+                    //Real time data refresh
+
+                    allTodos = await GlobalConfig.DataConnection.GetAllTodosPerUserAsync(_loggedInUser);
+                    todoListBox.DataSource = allTodos;
+                    ClearForm();
+                    MessageBox.Show("თქვენს მიერ არჩეული საქმე წარმატებით წაიშალა", "მონაცემები წაიშალა", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

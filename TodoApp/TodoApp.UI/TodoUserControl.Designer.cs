@@ -44,6 +44,8 @@
             this.editTodoBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.clearFormBtn = new System.Windows.Forms.Button();
+            this.deletePicture = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.deletePicture)).BeginInit();
             this.SuspendLayout();
             // 
             // todoListBox
@@ -207,15 +209,14 @@
             // 
             this.editTodoBtn.BackColor = System.Drawing.Color.Coral;
             this.editTodoBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.editTodoBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.editTodoBtn.FlatAppearance.BorderSize = 0;
             this.editTodoBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Sienna;
             this.editTodoBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.editTodoBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.editTodoBtn.ForeColor = System.Drawing.Color.White;
-            this.editTodoBtn.Location = new System.Drawing.Point(0, 653);
+            this.editTodoBtn.Location = new System.Drawing.Point(487, 3);
             this.editTodoBtn.Name = "editTodoBtn";
-            this.editTodoBtn.Size = new System.Drawing.Size(663, 56);
+            this.editTodoBtn.Size = new System.Drawing.Size(170, 38);
             this.editTodoBtn.TabIndex = 7;
             this.editTodoBtn.Text = "რედაქტირება";
             this.editTodoBtn.UseVisualStyleBackColor = false;
@@ -225,22 +226,24 @@
             // 
             this.addBtn.BackColor = System.Drawing.Color.ForestGreen;
             this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addBtn.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.addBtn.FlatAppearance.BorderSize = 0;
             this.addBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.LimeGreen;
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.addBtn.ForeColor = System.Drawing.Color.White;
-            this.addBtn.Location = new System.Drawing.Point(525, 5);
+            this.addBtn.Location = new System.Drawing.Point(0, 670);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(132, 39);
+            this.addBtn.Size = new System.Drawing.Size(663, 39);
             this.addBtn.TabIndex = 8;
             this.addBtn.Text = "დამატება";
             this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // clearFormBtn
             // 
             this.clearFormBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.clearFormBtn.Location = new System.Drawing.Point(397, 13);
+            this.clearFormBtn.Location = new System.Drawing.Point(270, 373);
             this.clearFormBtn.Name = "clearFormBtn";
             this.clearFormBtn.Size = new System.Drawing.Size(122, 29);
             this.clearFormBtn.TabIndex = 9;
@@ -248,11 +251,23 @@
             this.clearFormBtn.UseVisualStyleBackColor = true;
             this.clearFormBtn.Click += new System.EventHandler(this.clearFormBtn_Click);
             // 
+            // deletePicture
+            // 
+            this.deletePicture.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.deletePicture.Image = global::TodoApp.UI.Properties.Resources.delete;
+            this.deletePicture.Location = new System.Drawing.Point(449, 7);
+            this.deletePicture.Name = "deletePicture";
+            this.deletePicture.Size = new System.Drawing.Size(32, 32);
+            this.deletePicture.TabIndex = 10;
+            this.deletePicture.TabStop = false;
+            this.deletePicture.Click += new System.EventHandler(this.deletePicture_Click);
+            // 
             // TodoUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.deletePicture);
             this.Controls.Add(this.clearFormBtn);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.editTodoBtn);
@@ -272,6 +287,7 @@
             this.Name = "TodoUserControl";
             this.Size = new System.Drawing.Size(928, 709);
             this.Load += new System.EventHandler(this.TodoUserControl_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.deletePicture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -295,5 +311,6 @@
         private Button editTodoBtn;
         private Button addBtn;
         private Button clearFormBtn;
+        private PictureBox deletePicture;
     }
 }
