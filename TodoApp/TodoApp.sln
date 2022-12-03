@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.Services", "TodoApp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.Tests", "TodoApp.Tests\TodoApp.Tests.csproj", "{EAF157BD-4958-4419-A685-2B1961B888B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.UI", "TodoApp.UI\TodoApp.UI.csproj", "{29B3A3B2-4788-400D-BF95-647A03F54553}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoApp.UI", "TodoApp.UI\TodoApp.UI.csproj", "{29B3A3B2-4788-400D-BF95-647A03F54553}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

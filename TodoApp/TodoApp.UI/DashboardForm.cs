@@ -26,5 +26,17 @@ namespace TodoApp.UI
         {
             Close();
         }
+
+        private void myProfileLabel_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new MyProfileUserControl(_loggedInUser));
+        }
+
+        private void homeLabel_Click(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(new TodoUserControl(_loggedInUser));
+        }
     }
 }

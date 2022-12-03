@@ -87,6 +87,7 @@
             this.myProfileLabel.Size = new System.Drawing.Size(189, 31);
             this.myProfileLabel.TabIndex = 2;
             this.myProfileLabel.Text = "ჩემი პროფილი";
+            this.myProfileLabel.Click += new System.EventHandler(this.myProfileLabel_Click);
             // 
             // undoneLabel
             // 
@@ -123,6 +124,7 @@
             this.homeLabel.Size = new System.Drawing.Size(113, 31);
             this.homeLabel.TabIndex = 2;
             this.homeLabel.Text = "მთავარი";
+            this.homeLabel.Click += new System.EventHandler(this.homeLabel_Click);
             // 
             // myProfilePciture
             // 

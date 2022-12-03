@@ -71,7 +71,6 @@ namespace TodoApp.UI
             lastNameValue.Text = string.Empty;
             emailValue.Text = string.Empty;
         }
-
         private void exitLabel_Click(object sender, EventArgs e)
         {
             Close();
