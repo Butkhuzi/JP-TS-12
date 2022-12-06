@@ -105,6 +105,39 @@ namespace TodoApp.Services
 
             return model;
         }
+        public async Task<UserModel> EditUseAsync(UserModel model)
+        {
+            const string sqlExpression = "sp_editUser";
+            UserModel result = new();
+
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand command = new(sqlExpression,connection);
+                    command.CommandType = CommandType.StoredProcedure;
+
+                    command.Parameters.AddWithValue("@userId",model.UserId);
+                    command.Parameters.AddWithValue("@firstName",model.FirstName);
+                    command.Parameters.AddWithValue("@lastName",model.LastName);
+                    command.Parameters.AddWithValue("@email", model.Email);
+
+                    await connection.OpenAsync();
+                    await command.ExecuteReaderAsync();
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    await connection.CloseAsync();
+                }
+            }
+
+            return result;
+        }
+
         public async Task<List<TodoModel>> GetAllTodosAsync()
         {
             const string sqlExpression = "sp_allTodos";
@@ -247,6 +280,47 @@ namespace TodoApp.Services
                 return result;
             }
 
+        }
+        public async Task<UserModel> GetSingleUserAsync(UserModel model)
+        {
+            const string sqlExpression = "sp_getUser";
+            UserModel result = new();
+
+            using (SqlConnection connection = new(GlobalConfig.ConnectionString))
+            {
+                try
+                {
+                    SqlCommand command = new(sqlExpression, connection);
+                    command.CommandType= CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@userId", model.UserId);
+
+                    await connection.OpenAsync();
+
+                    SqlDataReader reader = await command.ExecuteReaderAsync();
+
+                    if (reader.HasRows)
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            result.UserId = reader.GetInt32(0);
+                            result.FirstName = reader.GetString(1);
+                            result.LastName = reader.GetString(2);
+                            result.FullName = reader.GetString(3);
+                            result.Email = reader.GetString(4);
+                        }
+                    }
+                }
+                catch (SqlException)
+                {
+                    throw;
+                }
+                finally
+                {
+                    await connection.CloseAsync();
+                }
+
+                return result;
+            }
         }
         public async Task<UserModel> LoginUserAsync(string email)
         {
