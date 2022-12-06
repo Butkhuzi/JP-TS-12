@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Todo.Library;
+using TodoApp.Services;
 
 namespace TodoApp.UI
 {
@@ -18,7 +19,6 @@ namespace TodoApp.UI
         {
             InitializeComponent();
             _loggedInUser = loggedInUser;
-            welcomeLabel.Text = $"გამარჯობა {_loggedInUser.FirstName}";
             mainPanel.Controls.Add(new TodoUserControl(_loggedInUser));
         }
 
@@ -37,6 +37,14 @@ namespace TodoApp.UI
         {
             mainPanel.Controls.Clear();
             mainPanel.Controls.Add(new TodoUserControl(_loggedInUser));
+        }
+
+        private async void DashboardForm_Activated(object sender, EventArgs e)
+        {
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+            UserModel? editedUser = await GlobalConfig.DataConnection.GetSingleUserAsync(_loggedInUser);
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+            welcomeLabel.Text = $"გამარჯობა {editedUser.FirstName}";
         }
     }
 }

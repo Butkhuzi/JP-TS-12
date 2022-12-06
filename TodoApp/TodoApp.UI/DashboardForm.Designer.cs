@@ -197,6 +197,7 @@
             this.Name = "DashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "მთავარი";
+            this.Activated += new System.EventHandler(this.DashboardForm_Activated);
             this.sideNavPanel.ResumeLayout(false);
             this.sideNavPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.myProfilePciture)).EndInit();

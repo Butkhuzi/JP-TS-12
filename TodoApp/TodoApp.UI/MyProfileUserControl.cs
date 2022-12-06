@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Todo.Library;
+using TodoApp.Services;
 
 namespace TodoApp.UI
 {
@@ -21,21 +22,33 @@ namespace TodoApp.UI
             _logedInUser = logedInUser;
         }
 
-        private void MyProfileUserControl_Load(object sender, EventArgs e)
+        private async void MyProfileUserControl_Load(object sender, EventArgs e)
         {
-            firstNameValue.Text = _logedInUser.FirstName;
-            lastNameValue.Text = _logedInUser.LastName;
-            emailValue.Text = _logedInUser.Email;
+            var user = await GlobalConfig.DataConnection.GetSingleUserAsync(_logedInUser);
 
-            //TODO -- Write GetSingleUser funcionality...
+            firstNameValue.Text = user.FirstName;
+            lastNameValue.Text = user.LastName;
+            emailValue.Text = user.Email;
         }
 
-        private void editUserBtn_Click(object sender, EventArgs e)
+        private async void editUserBtn_Click(object sender, EventArgs e)
         {
             if (FieldsAreNotEmpty() && EmailIsValid() && FieldsAreText())
             {
-                MessageBox.Show("EDIT");
-                //TODO -- User edit functionality...
+                UserModel userToEdit = new()
+                {
+                    UserId = _logedInUser.UserId,
+                    FirstName = firstNameValue.Text,
+                    LastName = lastNameValue.Text,
+                    Email = emailValue.Text
+                };
+
+                await GlobalConfig.DataConnection.EditUseAsync(userToEdit);
+                await GlobalConfig.DataConnection.GetSingleUserAsync(_logedInUser);
+
+                DashboardForm dashboardForm = new(userToEdit);
+
+                MessageBox.Show("თქვენს მიერ შემოყვანილი მონაცემები წარმატებით შეიცვალა", "მონაცემები წარმატებით დარედაქტირდა", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
